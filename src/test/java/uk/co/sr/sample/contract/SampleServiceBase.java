@@ -21,7 +21,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import uk.co.sr.sample.SampleServiceApplication;
 
-@SpringBootTest(classes = SampleServiceApplication.class, webEnvironment = WebEnvironment.RANDOM_PORT)
+@SpringBootTest(classes = SampleServiceApplication.class, webEnvironment = WebEnvironment.RANDOM_PORT, properties = {"server.servlet.context-path=/sample-service"})
 @ExtendWith(SpringExtension.class)
 @AutoConfigureWireMock(port = 0)
 @ActiveProfiles("contract-test")
@@ -33,16 +33,12 @@ public class SampleServiceBase {
 
   @BeforeEach
   public void setup() throws IOException {
-    log.info("In setup");
     RestAssured.baseURI = "http://localhost:" + port;
-    log.info("baseURI = {}", RestAssured.baseURI);
-
     mockApiCall("blockchain", "get-blockchain-prices", "/ticker");
   }
 
   private void mockApiCall(String apiName, String apiFunction, String apiPath) throws IOException {
     String response = Files.readString(Path.of("src/test/resources/mock-json/".concat(apiName.concat("/")).concat(apiFunction).concat(".response.json")), Charset.defaultCharset());
-    log.info("response = {}", response);
     stubFor(get(urlEqualTo(apiPath)).willReturn(aResponse().withHeader("Content-Type", "application/json")
         .withBody(response)));
   }

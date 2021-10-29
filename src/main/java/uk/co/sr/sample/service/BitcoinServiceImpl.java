@@ -19,7 +19,7 @@ public class BitcoinServiceImpl implements BitcoinService {
   public Mono<HighestPrice> getHighestPrice(final Currency currency) {
     log.debug("Enter getHighestPrice currency = {}", currency);
     return blockchainApiRepository.getPrice(currency)
-        .map(price -> HighestPrice.builder().price(price).build())
+        .map(HighestPrice::new)
         .doOnSuccess(highestPrice -> log.debug("Exit getHighestPrice highestPrice = {}", highestPrice));
   }
 }

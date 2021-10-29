@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
 @Slf4j
 public class SwaggerConfig {
 
-  /*@Bean
+  @Bean
   public OpenAPI springShopOpenAPI() {
     return new OpenAPI()
         .schema("currency", new StringSchema())
@@ -25,7 +25,7 @@ public class SwaggerConfig {
         .externalDocs(new ExternalDocumentation()
             .description("SpringShop Wiki Documentation")
             .url("https://springshop.wiki.github.org/docs"));
-  }*/
+  }
 
   @Bean
   public OpenApiCustomiser microTypeOpenApiCustomiser() {
