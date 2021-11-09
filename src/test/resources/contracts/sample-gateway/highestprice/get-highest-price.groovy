@@ -7,9 +7,6 @@ Contract.make {
     request {
         method'GET'
         url '/sample-service/api/1/highestprice?currency=USD'
-        headers {
-            contentType(applicationJson())
-        }
     }
     response {
         status 200

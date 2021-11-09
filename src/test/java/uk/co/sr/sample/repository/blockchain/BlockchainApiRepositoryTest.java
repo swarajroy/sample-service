@@ -1,6 +1,7 @@
 package uk.co.sr.sample.repository.blockchain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static uk.co.sr.sample.repository.blockchain.BlockchainApiRepository.BLOCKCHAIN_API_ENDPOINT;
 
 import java.math.BigDecimal;
 import java.util.Map;
@@ -36,7 +37,7 @@ class BlockchainApiRepositoryTest {
 
     mockWebServer.expectRequest(recordedRequest -> {
       assertThat(recordedRequest.getMethod()).isEqualTo(HttpMethod.GET.name());
-      assertThat(recordedRequest.getPath()).isEqualTo("/ticker");
+      assertThat(recordedRequest.getPath()).isEqualTo(BLOCKCHAIN_API_ENDPOINT);
     });
   }
 
